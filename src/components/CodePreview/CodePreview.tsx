@@ -1,21 +1,22 @@
-// src/components/CodePreview/CodePreview.tsx
-
 export interface CodePreviewProps {
   code: string;
+  isDarkMode?: boolean;
 }
 
-const CodePreview = ({ code }: CodePreviewProps) => {
+const CodePreview = ({ code, isDarkMode = false }: CodePreviewProps) => {
   return (
-    <div className="p-4 bg-gray-800 rounded-lg
-     text-gray-100 font-mono relative">
+    <div className={`p-4 rounded-lg font-mono relative ${
+      isDarkMode ? 'bg-gray-800 text-gray-100' : 'bg-gray-900 text-gray-100'
+    }`}>
       <button
         onClick={() => navigator.clipboard.writeText(code)}
-        className="absolute top-2 right-2 p-1
-         hover:bg-gray-700 rounded"
+        className={`absolute top-2 right-2 p-1 rounded ${
+          isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-800'
+        }`}
       >
         📋 نسخ
       </button>
-      <pre>{code}</pre>
+      <pre className="overflow-x-auto">{code}</pre>
     </div>
   );
 };
